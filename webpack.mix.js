@@ -11,7 +11,15 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix.js('resources/cpanel/js/app.js', 'public/cpanel/js')
+    .vue()
+    .postCss('resources/cpanel/css/app.css', 'public/cpanel/css', [
+        require('postcss-import'),
+        require('tailwindcss'),
+        require('autoprefixer'),
+    ])
+    .webpackConfig(require('./webpack.config'));
+
+if (mix.inProduction()) {
+    mix.version();
+}

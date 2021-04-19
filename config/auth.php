@@ -47,16 +47,10 @@ return [
             'hash' => false,
         ],
 
-        'admin' => [
+        'cpanel' => [
             'driver' => 'session',
             'provider' => 'admins',
-        ],
-
-        'admin-api' => [
-            'driver' => 'token',
-            'provider' => 'admins',
-            'hash' => false,
-        ],
+        ]
     ],
 
     /*
