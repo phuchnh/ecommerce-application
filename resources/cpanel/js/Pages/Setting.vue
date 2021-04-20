@@ -17,6 +17,7 @@
               </div>
               <div class="form-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
+                <b-button variant="outline-primary">Button</b-button>
               </div>
             </form>
           </div>

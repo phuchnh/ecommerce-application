@@ -4,7 +4,13 @@ import { InertiaProgress } from '@inertiajs/progress';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue';
 import Vue from 'vue';
 import UpdatePageTitle from './Mixins/UpdatePageTitle';
-
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+Vue.use(BootstrapVue)
+Vue.use(BootstrapVueIcons)
+Vue.use(InertiaPlugin);
+Vue.mixin(UpdatePageTitle);
+Vue.mixin({ methods: { route } });
 const el = document.getElementById('app');
 
 new Vue({
@@ -17,7 +23,5 @@ new Vue({
     }),
 }).$mount(el);
 
-Vue.use(InertiaPlugin);
-Vue.mixin(UpdatePageTitle);
-Vue.mixin({ methods: { route } });
+
 InertiaProgress.init({ color: '#4B5563' });

@@ -13,7 +13,6 @@
         "@inertiajs/inertia": "^0.8.4",
         "@inertiajs/inertia-vue": "^0.5.12",
         "@inertiajs/progress": "^0.2.4",
-        "@tailwindcss/forms": "^0.2.1",
         "autoprefixer": "^10.2.4",
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
@@ -24,10 +23,11 @@
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
-        "tailwindcss": "^2.0.3",
         "vue": "^2.6.12",
         "vue-loader": "^15.9.6",
         "vue-template-compiler": "^2.6.12"
     },
-    "dependencies": {}
+    "dependencies": {
+        "bootstrap-vue": "^2.21.2"
+    }
 }
