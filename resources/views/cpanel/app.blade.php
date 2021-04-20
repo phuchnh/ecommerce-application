@@ -8,16 +8,30 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('cpanel/css/app.css') }}">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <!-- Tabler Core -->
+        <link rel="stylesheet" href="{{ asset('cpanel/vendor/css/tabler.min.css') }}">
+        <!-- Tabler Plugins -->
+        <link rel="stylesheet" href="{{ asset('cpanel/vendor/css/tabler-buttons.min.css') }}">
+        <style>
+            body {
+                display: none;
+            }
+        </style>
 
         <!-- Scripts -->
         @routes
         <script src="{{ mix('cpanel/js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased">
+    <body class="antialiased">
         @inertia
+        <!-- Libs JS -->
+        <script src="{{ asset('cpanel/vendor/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('cpanel/vendor/libs/jquery/dist/jquery.slim.min.js') }}"></script>
+        <!-- Tabler Core -->
+        <script src="{{ asset('cpanel/vendor/js/tabler.min.js') }}"></script>
+        <script>
+            document.body.style.display = "block"
+        </script>
     </body>
 </html>

@@ -1,86 +1,53 @@
 <template>
-  <breeze-validation-errors class="mb-4" />
-
-  <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-    {{ status }}
-  </div>
-
-  <form @submit.prevent="submit">
-    <div>
-      <breeze-label for="email" value="Email" />
-      <breeze-input
-        id="email"
-        v-model="form.email"
-        autocomplete="username"
-        autofocus
-        class="mt-1 block w-full"
-        required
-        type="text"
-      />
-    </div>
-
-    <div class="mt-4">
-      <breeze-label for="password" value="Password" />
-      <breeze-input
-        id="password"
-        v-model="form.password"
-        autocomplete="current-password"
-        class="mt-1 block w-full"
-        required
-        type="password"
-      />
-    </div>
-
-    <div class="block mt-4">
-      <label class="flex items-center">
-        <breeze-checkbox v-model:checked="form.remember" name="remember" />
-        <span class="ml-2 text-sm text-gray-600">Remember me</span>
-      </label>
-    </div>
-
-    <div class="flex items-center justify-end mt-4">
-      <inertia-link
-        v-if="canResetPassword"
-        :href="route('password.request')"
-        class="underline text-sm text-gray-600 hover:text-gray-900"
-      >
-        Forgot your password?
-      </inertia-link>
-
-      <breeze-button
-        :class="{ 'opacity-25': form.processing }"
-        :disabled="form.processing"
-        class="ml-4"
-      >
-        Log in
-      </breeze-button>
+  <form class="card card-md" @submit.prevent="submit">
+    <div class="card-body">
+      <h2 class="mb-5 text-center">Login to your account</h2>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input
+          type="text"
+          class="form-control"
+          :class="{ 'is-invalid': !!errors.email }"
+          placeholder="Enter email"
+          autocomplete="off"
+          v-model="form.email"
+        />
+        <div v-if="errors.email" class="invalid-feedback">{{ errors.email }}</div>
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          :class="{ 'is-invalid': !!errors.password }"
+          placeholder="Password"
+          v-model="form.password"
+        />
+        <div v-if="errors.password" class="invalid-feedback">{{ errors.password }}</div>
+      </div>
+      <div class="mb-2">
+        <label class="form-check">
+          <input type="checkbox" class="form-check-input" v-model="form.remember" />
+          <span class="form-check-label">Remember</span>
+        </label>
+      </div>
+      <div class="form-footer">
+        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+      </div>
     </div>
   </form>
 </template>
 
 <script>
-import BreezeButton from '../../Components/Button';
-import BreezeGuestLayout from '../../Layouts/Guest';
-import BreezeInput from '../../Components/Input';
-import BreezeCheckbox from '../../Components/Checkbox';
-import BreezeLabel from '../../Components/Label';
-import BreezeValidationErrors from '../../Components/ValidationErrors';
+import BreezeGuestLayout from '@/Layouts/Guest';
 
 export default {
   layout: BreezeGuestLayout,
-  components: {
-    BreezeButton,
-    BreezeInput,
-    BreezeCheckbox,
-    BreezeLabel,
-    BreezeValidationErrors
-  },
+
+  components: {},
 
   props: {
-    auth: Object,
-    canResetPassword: Boolean,
-    errors: Object,
-    status: String
+    errors: Object
   },
 
   data() {

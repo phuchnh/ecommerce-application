@@ -29,9 +29,6 @@ class OptionsServiceProvider extends ServiceProvider
             Option::whereAutoload(true)->each(function (Option $option) {
                 Config::set('settings.'.$option->key, $option->value);
             });
-
-            // Register Facade
-            $this->app->alias('Option', \App\Support\Facades\Option::class);
         }
     }
 }

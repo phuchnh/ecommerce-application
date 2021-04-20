@@ -11,15 +11,16 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/cpanel/js/app.js', 'public/cpanel/js')
-    .vue()
-    .postCss('resources/cpanel/css/app.css', 'public/cpanel/css', [
-        require('postcss-import'),
-        require('tailwindcss'),
-        require('autoprefixer'),
-    ])
-    .webpackConfig(require('./webpack.config'));
+mix
+  .copyDirectory('resources/cpanel/vendor', 'public/cpanel/vendor')
+  .js('resources/cpanel/js/app.js', 'public/cpanel/js')
+  .vue()
+  .babelConfig({
+    plugins: ['@babel/plugin-syntax-dynamic-import']
+  })
+  .webpackConfig(require('./webpack.config'))
+  .sourceMaps();
 
 if (mix.inProduction()) {
-    mix.version();
+  mix.version();
 }

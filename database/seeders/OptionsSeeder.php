@@ -8,15 +8,16 @@ class OptionsSeeder extends Seeder
 {
 
     protected $options = [
-        ['key' => 'site_name', 'value' => ''],
-        ['key' => 'email_address', 'value' => ''],
-        ['key' => 'seo_meta_title', 'value' => ''],
-        ['key' => 'seo_meta_description', 'value' => ''],
-        ['key' => 'social_facebook', 'value' => ''],
-        ['key' => 'social_twitter', 'value' => ''],
-        ['key' => 'social_instagram', 'value' => ''],
-        ['key' => 'social_google', 'value' => '']
+        'site_name' => 'site_name',
+        'email_address' => 'email_address',
+        'seo_meta_title' => 'seo_meta_title',
+        'seo_meta_description' => 'seo_meta_description',
+        'social_facebook' => 'social_facebook',
+        'social_twitter' => 'social_twitter',
+        'social_instagram' => 'social_instagram',
+        'social_google' => 'social_google',
     ];
+
     /**
      * Run the database seeds.
      *
@@ -24,5 +25,6 @@ class OptionsSeeder extends Seeder
      */
     public function run()
     {
+        option()->autoload($this->options);
     }
 }

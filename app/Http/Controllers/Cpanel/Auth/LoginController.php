@@ -7,22 +7,13 @@ namespace App\Http\Controllers\Cpanel\Auth;
 use App\Http\Controllers\Cpanel\CpanelBaseController;
 use App\Http\Controllers\Cpanel\Requests\LoginRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 class LoginController extends CpanelBaseController
 {
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
-
     public function create(Request $request)
     {
-        return Inertia::render('Auth/Login', [
-            'canResetPassword' => Route::has('password.request'),
-            'status' => session('status'),
-        ]);
+        return Inertia::render('Auth/Login');
     }
 
     /**
