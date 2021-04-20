@@ -27,6 +27,6 @@ Route::prefix('cp')->as('cpanel.')->group(function () {
         Route::get('/setting', [SettingController::class, 'create'])
             ->name('setting');
 
-        Route::post('/setting', [SettingController::class, 'store']);
+        Route::put('/setting', [SettingController::class, 'update']);
     });
 });

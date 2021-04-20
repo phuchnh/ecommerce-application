@@ -18,6 +18,16 @@
           </div>
         </div>
         <!-- Page Content -->
+        <div class="row" v-if="$page.props.flash.message">
+          <div class="col-12">
+            <div class="alert alert-success alert-dismissible" role="alert">
+              {{ $page.props.flash.message }}
+              <a class="close" aria-label="close" @click.prevent="$page.props.flash.message = ''">
+                &times;
+              </a>
+            </div>
+          </div>
+        </div>
         <slot />
       </div>
     </div>
@@ -31,17 +41,13 @@ import Nav from '@/Layouts/Nav';
 export default {
   components: {
     Header,
-    Nav
+    Nav,
   },
 
   computed: {
     user() {
       return this.$page.props.auth.user;
-    }
+    },
   },
-
-  data() {
-    return {};
-  }
 };
 </script>
