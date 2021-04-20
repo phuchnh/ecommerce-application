@@ -15,8 +15,12 @@ mix
   .copyDirectory('resources/cpanel/vendor', 'public/cpanel/vendor')
   .js('resources/cpanel/js/app.js', 'public/cpanel/js')
   .vue()
+  .postCss('resources/cpanel/css/app.css', 'public/cpanel/css', [
+    require('postcss-import'),
+    require('autoprefixer'),
+  ])
   .babelConfig({
-    plugins: ['@babel/plugin-syntax-dynamic-import']
+    plugins: ['@babel/plugin-syntax-dynamic-import'],
   })
   .webpackConfig(require('./webpack.config'))
   .sourceMaps();

@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="{{ asset('cpanel/vendor/css/tabler.min.css') }}">
         <!-- Tabler Plugins -->
         <link rel="stylesheet" href="{{ asset('cpanel/vendor/css/tabler-buttons.min.css') }}">
+        <link rel="stylesheet" href="{{ mix('cpanel/css/app.css') }}">
+
         <style>
             body {
                 display: none;
