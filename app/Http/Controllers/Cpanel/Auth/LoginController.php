@@ -13,6 +13,7 @@ class LoginController extends CpanelBaseController
 {
     public function create(Request $request)
     {
+        $this->setPageTitle('Login');
         return Inertia::render('Auth/Login');
     }
 
