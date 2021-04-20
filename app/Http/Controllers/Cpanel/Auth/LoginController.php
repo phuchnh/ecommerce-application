@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Cpanel\Auth;
 
 use App\Http\Controllers\Cpanel\CpanelBaseController;
 use App\Http\Controllers\Cpanel\Requests\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,7 +34,9 @@ class LoginController extends CpanelBaseController
     {
         $request->authenticate();
         $request->session()->regenerate();
-        return redirect()->intended(RouteServiceProvider::CPANEL);
+        return redirect()->intended(
+            route('cpanel.dashboard')
+        );
     }
 
     /**
