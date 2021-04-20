@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Config;
+
 class Option extends \Appstract\Options\Option
 {
     /**
@@ -20,6 +22,7 @@ class Option extends \Appstract\Options\Option
                 ['key' => $key],
                 ['value' => $value, 'autoload' => true]
             );
+            Config::set('options.'.$key, $value);
         }
     }
 }

@@ -14,7 +14,7 @@ class SettingController extends CpanelBaseController
     public function create(Request $request)
     {
         return Inertia::render('Setting', [
-            'settings' => config('settings')
+            'settings' => config('options')
         ]);
     }
 

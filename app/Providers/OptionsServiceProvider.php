@@ -27,7 +27,7 @@ class OptionsServiceProvider extends ServiceProvider
     {
         if (!$this->app->runningInConsole()) {
             Option::whereAutoload(true)->each(function (Option $option) {
-                Config::set('settings.'.$option->key, $option->value);
+                Config::set('options.'.$option->key, $option->value);
             });
         }
     }
