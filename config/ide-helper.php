@@ -108,7 +108,7 @@ return [
     |
     */
 
-    'include_helpers' => true,
+    'include_helpers' => false,
 
     'helper_files' => [
         base_path() . '/vendor/laravel/framework/src/Illuminate/Support/helpers.php',
@@ -279,7 +279,7 @@ return [
     | or there is an import (use className) of a given class
     |
     */
-    'force_fqn' => false,
+    'force_fqn' => true,
 
     /*
     |--------------------------------------------------------------------------
