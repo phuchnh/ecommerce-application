@@ -13,7 +13,7 @@
         href="/"
         class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pr-0 pr-md-3"
       >
-        <span class="text-bold">Admin</span>
+        <span class="text-bold">Cpanel</span>
       </inertia-link>
       <div class="navbar-nav flex-row order-md-last">
         <div class="nav-item dropdown">
@@ -48,10 +48,10 @@
 export default {
   computed: {
     user() {
-      return this.$page.props.auth.user
-    }
-  }
-}
+      return this.$page.props.auth.user;
+    },
+  },
+};
 </script>
 
 <style scoped></style>

@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Cpanel;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class CpanelBaseController extends Controller
 {
@@ -15,5 +16,16 @@ class CpanelBaseController extends Controller
     protected function guard()
     {
         return Auth::guard('cpanel');
+    }
+
+    /**
+     * @param  string  $title
+     * @return void
+     */
+    protected function setPageTitle($title)
+    {
+        Inertia::share('cpanel', [
+            'title' => $title
+        ]);
     }
 }
