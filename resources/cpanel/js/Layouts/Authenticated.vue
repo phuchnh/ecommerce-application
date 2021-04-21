@@ -7,27 +7,24 @@
     <div class="content">
       <div class="container-xl">
         <!-- Page Heading -->
-        <div class="page-header" v-if="$slots.header">
+        <div class="page-header d-print-none" v-if="$slots.header">
           <div class="row align-items-center">
-            <div class="col-auto">
+            <div class="col">
               <h2 class="page-title">
                 <slot name="header" />
               </h2>
             </div>
-            <div class="col-auto ml-auto" v-if="$slots.action">
+            <div class="col-auto ms-auto d-print-none" v-if="$slots.action">
               <slot name="action" />
             </div>
           </div>
         </div>
         <!-- Page Content -->
         <div class="row" v-if="$page.props.flash.message">
-          <div class="col-12">
-            <div class="alert alert-success alert-dismissible" role="alert">
+          <div class="col-md-12">
+            <b-alert variant="success" show dismissible fade>
               {{ $page.props.flash.message }}
-              <a class="close" aria-label="close" @click.prevent="$page.props.flash.message = ''">
-                &times;
-              </a>
-            </div>
+            </b-alert>
           </div>
         </div>
         <slot />

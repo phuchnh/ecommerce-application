@@ -23,7 +23,7 @@ mix
     plugins: ['@babel/plugin-syntax-dynamic-import'],
   })
   .webpackConfig(require('./webpack.config'))
-  .extract(['vue'])
+  .extract(['vue', 'jquery'])
   .sourceMaps();
 
 if (mix.inProduction()) {

@@ -32,5 +32,8 @@ Route::prefix('cp')->as('cpanel.')->group(function () {
 
         Route::get('/media', [MediaController::class, 'index'])
             ->name('media.index');
+
+        Route::post('/media/upload', [MediaController::class, 'upload'])
+            ->name('media.upload');
     });
 });
