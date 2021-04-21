@@ -23,6 +23,8 @@
 
         <!-- Scripts -->
         @routes
+        <script src="{{ mix('cpanel/js/manifest.js') }}" defer></script>
+        <script src="{{ mix('cpanel/js/vendor.js') }}" defer></script>
         <script src="{{ mix('cpanel/js/app.js') }}" defer></script>
     </head>
     <body class="antialiased">

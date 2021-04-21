@@ -1,5 +1,5 @@
 export default {
-  created() {
+  mounted() {
     document.title = 'Laravel - ' + this.$page.props?.cpanel.title;
   },
 };

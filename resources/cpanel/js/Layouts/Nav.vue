@@ -5,12 +5,17 @@
         <ul class="navbar-nav">
           <li class="nav-item" :class="{ active: route().current('cpanel.dashboard') }">
             <inertia-link class="nav-link" :href="route('cpanel.dashboard')">
-              <span class="nav-link-title">Dashboard</span>
+              <span class="nav-link-title">DASHBOARD</span>
             </inertia-link>
           </li>
           <li class="nav-item" :class="{ active: route().current('cpanel.setting') }">
             <inertia-link class="nav-link" :href="route('cpanel.setting')">
-              <span class="nav-link-title">Setting</span>
+              <span class="nav-link-title">SETTING</span>
+            </inertia-link>
+          </li>
+          <li class="nav-item" :class="{ active: route().current('cpanel.media.index') }">
+            <inertia-link class="nav-link" :href="route('cpanel.media.index')">
+              <span class="nav-link-title">MEDIA</span>
             </inertia-link>
           </li>
         </ul>

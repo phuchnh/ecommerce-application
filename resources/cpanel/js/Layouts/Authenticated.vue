@@ -1,7 +1,9 @@
 <template>
   <div class="page">
-    <Header />
-    <Nav />
+    <div class="sticky-top">
+      <Header />
+      <Nav />
+    </div>
     <div class="content">
       <div class="container-xl">
         <!-- Page Heading -->

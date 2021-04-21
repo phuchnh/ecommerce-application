@@ -1,20 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cpanel;
 
+use App\Http\Controllers\Cpanel\CpanelBaseController;
 use App\Models\Media;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
-class MediaController extends Controller
+class MediaController extends CpanelBaseController
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index()
     {
-        //
+        $this->setPageTitle('Media');
+        return Inertia::render('Media');
     }
 
     /**

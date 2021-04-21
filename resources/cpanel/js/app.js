@@ -5,7 +5,12 @@ import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-v
 import Vue from 'vue';
 import UpdatePageTitle from './Mixins/UpdatePageTitle';
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
+import VueLazyload from 'vue-lazyload';
 
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  attempt: 1,
+});
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.use(InertiaPlugin);

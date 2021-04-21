@@ -4,6 +4,7 @@
 use App\Http\Controllers\Cpanel\Auth\LoginController;
 use App\Http\Controllers\Cpanel\DashboardController;
 use App\Http\Controllers\Cpanel\SettingController;
+use App\Http\Controllers\Cpanel\MediaController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('cp')->as('cpanel.')->group(function () {
@@ -28,5 +29,8 @@ Route::prefix('cp')->as('cpanel.')->group(function () {
             ->name('setting');
 
         Route::put('/setting', [SettingController::class, 'update']);
+
+        Route::get('/media', [MediaController::class, 'index'])
+            ->name('media.index');
     });
 });

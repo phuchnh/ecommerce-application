@@ -4,8 +4,8 @@
       <h2 class="page-title">Setting</h2>
     </template>
 
-    <div class="row">
-      <div class="col-sm-12">
+    <div class="row row-cards">
+      <div class="col-md-12">
         <div class="card">
           <div class="card-body">
             <form @submit.prevent="submit">
@@ -17,7 +17,6 @@
               </div>
               <div class="form-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <b-button variant="outline-primary">Button</b-button>
               </div>
             </form>
           </div>
