@@ -8,19 +8,29 @@ use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class MediaController extends CpanelBaseController
 {
     /**
      * Display a listing of the resource.
      *
+     * @param  Request  $request
      * @return \Inertia\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->setPageTitle('Media');
+        $query = QueryBuilder::for(Media::class)
+            ->allowedFilters(['name'])
+            ->simplePaginate(10);
+
         return Inertia::render('Media', [
-            'media' => MediaResource::collection(Media::simplePaginate(10)),
+            'filter' => $request->get('filter'),
+            'sort' => $request->get('sort'),
+            'media' => function () use ($query) {
+                return MediaResource::collection($query);
+            },
         ]);
     }
 
@@ -105,7 +115,7 @@ class MediaController extends CpanelBaseController
         $media->mime_type = $image->getMimeType();
         $media->size = $image->getSize();
         $media->storage_disk = 'public';
-        $media->path = optional($request->file('image'))->storePublicly('media',[
+        $media->path = optional($request->file('image'))->storePublicly('media', [
             'disk' => $media->storage_disk
         ]);
 

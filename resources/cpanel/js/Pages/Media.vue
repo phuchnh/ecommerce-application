@@ -4,7 +4,15 @@
       <h2 class="page-title">Media</h2>
     </template>
     <template #action>
-      <form class="d-flex">
+      <form class="d-flex" @submit.prevent="search">
+        <div class="mr-3">
+          <div class="input-icon">
+            <input type="text" class="form-control" placeholder="Search…" v-model="filter.name" />
+            <span class="input-icon-addon">
+              <i class="ti ti-search icon"></i>
+            </span>
+          </div>
+        </div>
         <label class="btn btn-primary">
           <i class="ti ti-upload icon"></i>
           Upload <input type="file" hidden @change="upload($event.target.files[0])" />
@@ -33,16 +41,20 @@
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated';
 import CardImage from '@/Components/CardImage';
 import SimplePaginate from '@/Components/SimplePaginate';
+import Empty from '@/Components/Empty';
+import { Inertia } from '@inertiajs/inertia';
 
 export default {
   components: {
     BreezeAuthenticatedLayout,
     CardImage,
     SimplePaginate,
+    Empty,
   },
 
   props: {
     media: Object,
+    filter: Object,
   },
 
   data() {
@@ -69,6 +81,19 @@ export default {
         forceFormData: true,
         onFinish: () => {},
       });
+    },
+
+    search() {
+      Inertia.visit(
+        this.route('cpanel.media.index', {
+          _query: {
+            'filter[name]': this.filter.name,
+          },
+        }),
+        {
+          only: ['media'],
+        }
+      );
     },
   },
 };
