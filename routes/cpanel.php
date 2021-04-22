@@ -35,5 +35,8 @@ Route::prefix('cp')->as('cpanel.')->group(function () {
 
         Route::post('/media/upload', [MediaController::class, 'upload'])
             ->name('media.upload');
+
+        Route::delete('/media/{media}', [MediaController::class, 'destroy'])
+            ->name('media.destroy');
     });
 });

@@ -7,6 +7,7 @@ use App\Http\Resources\MediaResource;
 use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -26,7 +27,7 @@ class MediaController extends CpanelBaseController
             ->simplePaginate(10);
 
         return Inertia::render('Media', [
-            'filter' => $request->get('filter'),
+            'filter' => $request->get('filter', (object) []),
             'sort' => $request->get('sort'),
             'media' => function () use ($query) {
                 return MediaResource::collection($query);
@@ -93,11 +94,15 @@ class MediaController extends CpanelBaseController
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Media  $media
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \League\Flysystem\FileNotFoundException
      */
     public function destroy(Media $media)
     {
-        //
+        Storage::disk($media->storage_disk)->readAndDelete($media->path);
+        $media->delete();
+        return Redirect::route('cpanel.media.index')
+            ->with('message', 'Successfully delete file.');
     }
 
     /**
