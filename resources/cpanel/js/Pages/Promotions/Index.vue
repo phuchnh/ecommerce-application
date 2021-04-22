@@ -107,12 +107,6 @@ export default {
     },
   },
 
-  mounted() {
-    axios.get('/api/user').then(resp => {
-      console.log(resp);
-    });
-  },
-
   methods: {
     remove(id) {
       Inertia.delete(this.route('cpanel.promotions.destroy', { promotion: id }), {

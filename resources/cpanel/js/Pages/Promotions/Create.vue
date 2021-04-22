@@ -4,6 +4,7 @@
       <h2 class="page-title">{{ $page.props.cpanel.title }}</h2>
     </template>
     <div class="row row-cards">
+      <MediaDialog />
       <div class="col-md-12">
         <div class="card">
           <div class="card-body">
@@ -94,10 +95,12 @@
 
 <script>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated';
+import MediaDialog from '@/Components/MediaDialog';
 import { VueEditor } from 'vue2-editor';
 
 export default {
   components: {
+    MediaDialog,
     VueEditor,
     BreezeAuthenticatedLayout,
   },

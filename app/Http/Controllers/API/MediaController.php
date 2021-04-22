@@ -1,29 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\Option;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\MediaResource;
+use App\Models\Media;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
-class OptionController extends Controller
+class MediaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $query = QueryBuilder::for(Media::class)
+            ->allowedFilters(['name'])
+            ->simplePaginate(10);
+        return MediaResource::collection($query);
     }
 
     /**
@@ -40,21 +37,10 @@ class OptionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Option  $option
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Option $option)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Option  $option
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Option $option)
+    public function show($id)
     {
         //
     }
@@ -63,10 +49,10 @@ class OptionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Option  $option
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Option $option)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -74,10 +60,10 @@ class OptionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Option  $option
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Option $option)
+    public function destroy($id)
     {
         //
     }
