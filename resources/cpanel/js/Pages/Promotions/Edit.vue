@@ -1,9 +1,7 @@
 <template></template>
 
 <script>
-export default {
-  name: 'Index',
-};
+export default {};
 </script>
 
 <style scoped></style>

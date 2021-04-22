@@ -18,6 +18,11 @@
               <span class="nav-link-title">MEDIA</span>
             </inertia-link>
           </li>
+          <li class="nav-item" :class="{ active: route().current('cpanel.promotions.index') }">
+            <inertia-link class="nav-link" :href="route('cpanel.promotions.index')">
+              <span class="nav-link-title">PROMOTION</span>
+            </inertia-link>
+          </li>
         </ul>
       </div>
     </div>

@@ -47,7 +47,7 @@ export default {
   components: {},
 
   props: {
-    errors: Object
+    errors: Object,
   },
 
   data() {
@@ -55,8 +55,8 @@ export default {
       form: this.$inertia.form({
         email: '',
         password: '',
-        remember: false
-      })
+        remember: false,
+      }),
     };
   },
 
@@ -65,12 +65,12 @@ export default {
       this.form
         .transform(data => ({
           ...data,
-          remember: this.form.remember ? 'on' : ''
+          remember: this.form.remember ? 'on' : '',
         }))
         .post(this.route('cpanel.login'), {
-          onFinish: () => this.form.reset('password')
+          onFinish: () => this.form.reset('password'),
         });
-    }
-  }
+    },
+  },
 };
 </script>
