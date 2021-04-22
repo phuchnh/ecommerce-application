@@ -13,13 +13,14 @@ class MediaController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  Request  $request
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
         $query = QueryBuilder::for(Media::class)
             ->allowedFilters(['name'])
-            ->simplePaginate(10);
+            ->simplePaginate($request->get('per_page', 10));
         return MediaResource::collection($query);
     }
 

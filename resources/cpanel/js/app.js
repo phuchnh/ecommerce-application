@@ -21,11 +21,11 @@ Vue.mixin({ methods: { route } });
 const el = document.getElementById('app');
 
 new Vue({
-  render: (h) =>
+  render: h =>
     h(InertiaApp, {
       props: {
         initialPage: JSON.parse(el.dataset.page),
-        resolveComponent: (name) => require(`./Pages/${name}`).default,
+        resolveComponent: name => require(`./Pages/${name}`).default,
       },
     }),
 }).$mount(el);

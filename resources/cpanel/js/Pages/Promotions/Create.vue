@@ -4,7 +4,7 @@
       <h2 class="page-title">{{ $page.props.cpanel.title }}</h2>
     </template>
     <div class="row row-cards">
-      <MediaDialog />
+      <MediaDialog ref="dialog" />
       <div class="col-md-12">
         <div class="card">
           <div class="card-body">
@@ -12,13 +12,10 @@
               <div class="form-group mb-3 row">
                 <label class="form-label col-3 col-form-label">Image Cover</label>
                 <div class="col">
-                  <div class="form-file">
-                    <input type="file" class="form-file-input" id="customFile" />
-                    <label class="form-file-label" for="customFile">
-                      <span class="form-file-text">Choose file...</span>
-                      <span class="form-file-button">Browse</span>
-                    </label>
-                  </div>
+                  <button type="button" class="btn btn-blue" @click="show">
+                    <i class="ti ti-file icon"></i>
+                    Gallery
+                  </button>
                 </div>
                 <div v-if="errors.img_cover" class="invalid-feedback">
                   {{ errors.img_cover }}
@@ -124,6 +121,9 @@ export default {
   },
 
   methods: {
+    show() {
+      this.$refs.dialog.show();
+    },
     submit() {
       this.form
         .transform(data => ({
@@ -133,6 +133,10 @@ export default {
           onFinish: () => this.form.reset('password'),
         });
     },
+  },
+
+  beforeDestroy() {
+    this.$refs.dialog.hide();
   },
 };
 </script>
