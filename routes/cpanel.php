@@ -8,7 +8,7 @@ use App\Http\Controllers\Cpanel\MediaController;
 use App\Http\Controllers\Cpanel\PromotionController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('cp')->as('cpanel.')->group(function () {
+Route::prefix('admin')->as('cpanel.')->group(function () {
 
     Route::get('/login', [LoginController::class, 'create'])
         ->middleware('guest')
@@ -20,8 +20,8 @@ Route::prefix('cp')->as('cpanel.')->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])
         ->name('logout');
 
-    Route::middleware('auth:cpanel')->group(function () {
-        Route::redirect('/', '/cp/dashboard');
+    Route::middleware(['auth', 'admin'])->group(function () {
+        Route::redirect('/', '/admin/dashboard');
 
         Route::get('/dashboard', DashboardController::class)
             ->name('dashboard');

@@ -78,6 +78,7 @@ import BreezeAuthenticatedLayout from '@/Layouts/Authenticated';
 import SimplePaginate from '@/Components/SimplePaginate';
 import Empty from '@/Components/Empty';
 import { Inertia } from '@inertiajs/inertia';
+import axios from 'axios';
 
 export default {
   components: {

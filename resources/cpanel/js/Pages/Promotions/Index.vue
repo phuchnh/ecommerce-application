@@ -107,6 +107,12 @@ export default {
     },
   },
 
+  mounted() {
+    axios.get('/api/user').then(resp => {
+      console.log(resp);
+    });
+  },
+
   methods: {
     remove(id) {
       Inertia.delete(this.route('cpanel.promotions.destroy', { promotion: id }), {
@@ -122,7 +128,7 @@ export default {
       Inertia.visit(
         this.route('cpanel.promotions.index', {
           _query: {
-            'filter[title]': this.filter.name,
+            'filter[title]': this.filter.title,
           },
         }),
         {

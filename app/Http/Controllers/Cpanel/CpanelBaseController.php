@@ -15,7 +15,7 @@ class CpanelBaseController extends Controller
      */
     protected function guard()
     {
-        return Auth::guard('cpanel');
+        return Auth::guard();
     }
 
     /**
