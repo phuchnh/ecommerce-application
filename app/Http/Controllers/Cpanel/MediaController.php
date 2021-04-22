@@ -26,7 +26,7 @@ class MediaController extends CpanelBaseController
             ->allowedFilters(['name'])
             ->simplePaginate(10);
 
-        return Inertia::render('Media', [
+        return Inertia::render('Media/Index', [
             'filter' => $request->get('filter', (object) []),
             'sort' => $request->get('sort'),
             'media' => function () use ($query) {
