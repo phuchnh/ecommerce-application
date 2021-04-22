@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Cpanel;
 
 use App\Http\Requests\PromotionCreatesRequest;
 use App\Http\Requests\PromotionUpdatesRequest;
-use App\Http\Resources\MediaResource;
 use App\Http\Resources\PromotionResource;
-use App\Models\Media;
 use App\Models\Promotion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -32,7 +30,7 @@ class PromotionController extends CpanelBaseController
         return Inertia::render('Promotions/Index', [
             'filter' => $request->get('filter', (object) []),
             'sort' => $request->get('sort'),
-            'media' => function () use ($query) {
+            'promotions' => function () use ($query) {
                 return PromotionResource::collection($query);
             },
         ]);

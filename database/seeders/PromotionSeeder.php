@@ -13,6 +13,6 @@ class PromotionSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Promotion::factory(50)->create();
     }
 }

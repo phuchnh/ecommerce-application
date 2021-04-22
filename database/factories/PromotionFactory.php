@@ -22,7 +22,13 @@ class PromotionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'promotion_type' => $this->faker->randomElement(['offline', 'online']),
+            'img_cover' => $this->faker->imageUrl(),
+            'title' => $this->faker->title,
+            'content' => $this->faker->randomHtml(),
+            'from_date' => $this->faker->dateTime,
+            'to_date' => $this->faker->dateTime,
+            'published_at' => $this->faker->dateTime,
         ];
     }
 }

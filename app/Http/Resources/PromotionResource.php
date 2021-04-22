@@ -2,8 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Promotion;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin Promotion
+ */
 class PromotionResource extends JsonResource
 {
     /**
@@ -14,6 +18,17 @@ class PromotionResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'promotion_type' => $this->promotion_type,
+            'img_cover' => $this->img_cover,
+            'title' => $this->title,
+            'content' => $this->content,
+            'from_date' => $this->from_date,
+            'to_date' => $this->to_date,
+            'published_at' => $this->published_at,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ];
     }
 }

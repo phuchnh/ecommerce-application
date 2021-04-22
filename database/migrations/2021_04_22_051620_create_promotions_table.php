@@ -18,6 +18,7 @@ class CreatePromotionsTable extends Migration
             $table->string('promotion_type')->index();
             $table->string('img_cover');
             $table->string('title')->index();
+            $table->string('slug')->unique();
             $table->longText('content')->nullable();
             $table->dateTime('from_date');
             $table->timestamp('to_date')->nullable();

@@ -28,29 +28,29 @@
       <div class="col-md-12" v-if="$page.props.errors.image">
         <b-alert variant="warning" show dismissible fade>{{ $page.props.errors.image }}</b-alert>
       </div>
-      <div class="col-md-12" v-if="media.data.length">
-        <SimplePaginate :links="media.links" />
+      <div class="col-md-12" v-if="promotions.data.length">
+        <SimplePaginate :links="promotions.links" />
       </div>
       <div class="col-md-12">
         <div class="card">
-          <Empty v-if="!media.data.length" />
-          <div class="list-group card-list-group" v-if="media.data.length">
-            <div class="list-group-item" v-for="item of media.data" :key="item.id">
+          <Empty v-if="!promotions.data.length" />
+          <div class="list-group card-list-group" v-if="promotions.data.length">
+            <div class="list-group-item" v-for="item of promotions.data" :key="item.id">
               <div class="row row-sm align-items-center">
                 <div class="col-auto">
                   <img
-                    :src="item.url"
+                    :src="item.img_cover"
                     class="object-cover"
-                    :alt="item.name"
+                    :alt="item.title"
                     width="100"
                     height="100"
                   />
                 </div>
                 <div class="col">
-                  <div class="text-body">{{ item.name }}</div>
+                  <div class="text-body">{{ item.title }}</div>
                 </div>
                 <div class="col-auto">
-                  <div class="text-muted">{{ item.mime_type }}</div>
+                  <div class="text-muted">{{ item.promotion_type }}</div>
                 </div>
                 <div class="col-auto">
                   <div class="text-muted">{{ item.size }}</div>
@@ -65,8 +65,8 @@
           </div>
         </div>
       </div>
-      <div class="col-md-12" v-if="media.data.length">
-        <SimplePaginate :links="media.links" />
+      <div class="col-md-12" v-if="promotions.data.length">
+        <SimplePaginate :links="promotions.links" />
       </div>
     </div>
   </breeze-authenticated-layout>
@@ -86,7 +86,7 @@ export default {
   },
 
   props: {
-    media: Object,
+    promotions: Object,
     filter: Object,
   },
 
@@ -109,10 +109,10 @@ export default {
 
   methods: {
     remove(id) {
-      Inertia.delete(this.route('cpanel.media.destroy', { media: id }), {
+      Inertia.delete(this.route('cpanel.promotions.destroy', { promotion: id }), {
         onFinish: () => {
-          Inertia.visit(this.route('cpanel.media.index'), {
-            only: ['media'],
+          Inertia.visit(this.route('cpanel.promotions.index'), {
+            only: ['promotions'],
           });
         },
       });
@@ -120,13 +120,13 @@ export default {
 
     search() {
       Inertia.visit(
-        this.route('cpanel.media.index', {
+        this.route('cpanel.promotions.index', {
           _query: {
             'filter[title]': this.filter.name,
           },
         }),
         {
-          only: ['media', 'filter'],
+          only: ['promotions', 'filter'],
         }
       );
     },
