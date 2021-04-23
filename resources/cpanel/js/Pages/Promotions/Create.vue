@@ -107,9 +107,12 @@ export default {
     VueEditor,
     BreezeAuthenticatedLayout,
   },
+
   props: {
     errors: Object,
   },
+
+  remember: 'form',
 
   data() {
     return {
@@ -135,14 +138,7 @@ export default {
 
   methods: {
     submit() {
-      this.form
-        .transform(data => ({
-          ...data,
-        }))
-        .post(this.route('cpanel.promotions.store'), {
-          forceFormData: true,
-          onFinish: () => this.form.reset('password'),
-        });
+      this.form.post(this.route('cpanel.promotions.store'));
     },
   },
 };

@@ -40,6 +40,7 @@ Route::prefix('admin')->as('cpanel.')->group(function () {
         Route::delete('/media/{media}', [MediaController::class, 'destroy'])
             ->name('media.destroy');
 
+        // Promotions
         Route::resource('promotions', PromotionController::class);
     });
 });

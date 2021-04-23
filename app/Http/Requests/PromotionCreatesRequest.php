@@ -39,9 +39,9 @@ class PromotionCreatesRequest extends FormRequest
      * @return array
      * @throws ValidationException
      */
-    public function fromCreateRequest()
+    public function validatedInputs()
     {
-        $path = $this->file('img_cover')->storePublicly('promotions/img_covers', [
+        $path = $this->file('img_cover')->storePublicly('uploads', [
             'disk' => 'public'
         ]);
 

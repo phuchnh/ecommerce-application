@@ -22,9 +22,12 @@ class PromotionResource extends JsonResource
         return [
             'id' => $this->id,
             'promotion_type' => $this->promotion_type,
-            'img_cover' => Storage::disk('public')->url($this->img_cover),
+            'img_cover' => $this->img_cover,
+            'img_cover_url' => Storage::disk('public')->url($this->img_cover),
             'title' => $this->title,
-            'content' => $this->content,
+            'content' => $this->when(!$request->routeIs(['index']), function () {
+                return $this->content;
+            }),
             'from_date' => $this->from_date,
             'to_date' => $this->to_date,
             'published_at' => $this->published_at,

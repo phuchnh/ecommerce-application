@@ -14,13 +14,24 @@
                   <label class="btn btn-primary">
                     <i class="ti ti-upload icon"></i>
                     Upload
-                    <input type="file" hidden @input="form.img_cover = $event.target.files[0]" />
+                    <input type="file" hidden @input="handleImageUpload($event)" />
                   </label>
                   <strong v-if="form.img_cover && form.img_cover.name" class="ml-3">
                     {{ form.img_cover.name }}
                   </strong>
-                  <div v-if="form.img_cover">
-                    <img :src="form.img_cover" :alt="form.title" height="150" />
+                  <div>
+                    <img
+                      v-if="this.promotion.data.img_cover_url && !is_upload"
+                      :src="this.promotion.data.img_cover_url"
+                      :alt="this.promotion.data.title"
+                      height="150"
+                    />
+                    <img
+                      v-if="form.img_cover && is_upload"
+                      :src="form.img_cover | preview"
+                      :alt="form.img_cover.name"
+                      height="150"
+                    />
                   </div>
                   <div v-if="errors.img_cover" class="text-red">
                     {{ errors.img_cover }}
@@ -59,14 +70,8 @@
                 <div class="col">
                   <div class="row">
                     <div class="col">
-                      {{ form.from_date }}
-                      <input type="date" class="form-control" v-model="form.from_date" />
-                      <b-form-datepicker
-                        class="form-control"
-                        v-model="form.from_date"
-                        date-format-options=""
-                      >
-                      </b-form-datepicker>
+                      <flat-pickr v-model="date" class="form-control"></flat-pickr>
+
                       <div v-if="errors.from_date" class="text-red">
                         {{ errors.from_date }}
                       </div>
@@ -86,7 +91,9 @@
                 </div>
               </div>
               <div class="form-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" :disabled="form.processing">
+                  Submit
+                </button>
                 <button type="button" class="btn btn-outline-success">Submit & Publish</button>
                 <inertia-link
                   :href="route('cpanel.promotions.index')"
@@ -119,8 +126,12 @@ export default {
     errors: Object,
   },
 
+  remember: ['form', 'is_upload'],
+
   data() {
     return {
+      date: null,
+      is_upload: false,
       promotion_type: ['online', 'offline'],
       form: this.$inertia.form({
         promotion_type: this.promotion.data.promotion_type,
@@ -142,15 +153,19 @@ export default {
   },
 
   methods: {
+    handleImageUpload($event) {
+      this.form.img_cover = $event.target.files[0];
+      this.is_upload = true;
+    },
     submit() {
       this.form
-        .transform(data => ({
-          ...data,
-        }))
-        .post(this.route('cpanel.promotions.store'), {
-          forceFormData: true,
-          onFinish: () => this.form.reset('password'),
-        });
+        .transform(data => {
+          return {
+            ...data,
+            _method: 'PUT',
+          };
+        })
+        .post(this.route('cpanel.promotions.update', { promotion: this.promotion.data.id }));
     },
   },
 };

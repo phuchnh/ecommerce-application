@@ -57,7 +57,7 @@ class PromotionController extends CpanelBaseController
      */
     public function store(PromotionCreatesRequest $request)
     {
-        Promotion::create($request->fromCreateRequest());
+        Promotion::create($request->validatedInputs());
 
         return Redirect::route('cpanel.promotions.index')->with('message', 'Promotion created.');
     }
@@ -97,7 +97,8 @@ class PromotionController extends CpanelBaseController
      */
     public function update(PromotionUpdatesRequest $request, Promotion $promotion)
     {
-        //
+        $promotion->update($request->validatedInputs());
+        return Redirect::back()->with('message', 'Promotion updated.');
     }
 
     /**
@@ -109,6 +110,6 @@ class PromotionController extends CpanelBaseController
     public function destroy(Promotion $promotion)
     {
         $promotion->delete();
-        return Redirect::route('cpanel.promotions.index')->with('message', 'Successfully deletes promotion.');
+        return Redirect::route('cpanel.promotions.index')->with('message', 'Promotion deleted.');
     }
 }

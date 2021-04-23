@@ -24,12 +24,28 @@ class PromotionUpdatesRequest extends FormRequest
     public function rules()
     {
         return [
-            'promotion_type' => 'required',
-            'img_cover' => 'required',
-            'title' => 'required',
-            'content' => 'required',
-            'from_date' => 'required',
-            'to_date' => 'required'
+            'promotion_type' => 'filled|string',
+            'img_cover' => 'filled',
+            'title' => 'filled|max:120',
+            'content' => 'filled',
+            'from_date' => 'filled|date',
+            'to_date' => 'filled|date'
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function validatedInputs()
+    {
+        $path = optional($this->file('img_cover'))->storePublicly('uploads', [
+            'disk' => 'public'
+        ]);
+
+        if ($path) {
+            return array_merge($this->validated(), ['img_cover' => $path]);
+        }
+
+        return $this->validated();
     }
 }

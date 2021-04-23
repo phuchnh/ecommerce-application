@@ -39,7 +39,7 @@
               <div class="row row-sm align-items-center">
                 <div class="col-auto">
                   <img
-                    :src="item.img_cover"
+                    :src="item.img_cover_url"
                     class="object-cover"
                     :alt="item.title"
                     width="100"
@@ -113,6 +113,10 @@ export default {
 
   methods: {
     remove(id) {
+      if (!confirm('Delete?')) {
+        return;
+      }
+
       Inertia.delete(this.route('cpanel.promotions.destroy', { promotion: id }), {
         onFinish: () => {
           Inertia.visit(this.route('cpanel.promotions.index'), {

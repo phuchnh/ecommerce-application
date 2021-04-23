@@ -7,14 +7,15 @@ import UpdatePageTitle from './Mixins/UpdatePageTitle';
 import { BootstrapVue } from 'bootstrap-vue';
 import VueLazyload from 'vue-lazyload';
 import Vue2Editor from 'vue2-editor';
-import Datepicker from 'vuejs-datepicker';
+import VueFlatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
 
 Vue.use(VueLazyload, {
   preLoad: 1.3,
   attempt: 1,
 });
 Vue.use(BootstrapVue);
-Vue.use(Datepicker);
+Vue.use(VueFlatPickr);
 Vue.use(Vue2Editor);
 Vue.use(InertiaPlugin);
 Vue.mixin(UpdatePageTitle);
