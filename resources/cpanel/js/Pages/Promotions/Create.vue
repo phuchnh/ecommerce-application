@@ -4,7 +4,6 @@
       <h2 class="page-title">{{ $page.props.cpanel.title }}</h2>
     </template>
     <div class="row row-cards">
-      <MediaDialog ref="dialog" />
       <div class="col-md-12">
         <div class="card">
           <div class="card-body">
@@ -12,13 +11,20 @@
               <div class="form-group mb-3 row">
                 <label class="form-label col-3 col-form-label">Image Cover</label>
                 <div class="col">
-                  <button type="button" class="btn btn-blue" @click="show">
-                    <i class="ti ti-file icon"></i>
-                    Gallery
-                  </button>
-                </div>
-                <div v-if="errors.img_cover" class="invalid-feedback">
-                  {{ errors.img_cover }}
+                  <label class="btn btn-primary">
+                    <i class="ti ti-upload icon"></i>
+                    Upload
+                    <input type="file" hidden @input="form.img_cover = $event.target.files[0]" />
+                  </label>
+                  <strong v-if="form.img_cover && form.img_cover.name" class="ml-3">
+                    {{ form.img_cover.name }}
+                  </strong>
+                  <div v-if="form.img_cover">
+                    <img :src="form.img_cover | preview" :alt="form.img_cover.name" height="150" />
+                  </div>
+                  <div v-if="errors.img_cover" class="text-red">
+                    {{ errors.img_cover }}
+                  </div>
                 </div>
               </div>
               <div class="form-group mb-3 row">
@@ -120,23 +126,24 @@ export default {
     };
   },
 
-  methods: {
-    show() {
-      this.$refs.dialog.show();
+  filters: {
+    preview: function (file) {
+      if (!file) return '';
+      return URL.createObjectURL(file);
     },
+  },
+
+  methods: {
     submit() {
       this.form
         .transform(data => ({
           ...data,
         }))
         .post(this.route('cpanel.promotions.store'), {
+          forceFormData: true,
           onFinish: () => this.form.reset('password'),
         });
     },
-  },
-
-  beforeDestroy() {
-    this.$refs.dialog.hide();
   },
 };
 </script>

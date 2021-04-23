@@ -47,7 +47,11 @@
                   />
                 </div>
                 <div class="col">
-                  <div class="text-body">{{ item.title }}</div>
+                  <div class="text-body">
+                    <inertia-link :href="route('cpanel.promotions.edit', { promotion: item.id })">
+                      {{ item.title }}
+                    </inertia-link>
+                  </div>
                 </div>
                 <div class="col-auto">
                   <div class="text-muted">{{ item.promotion_type }}</div>

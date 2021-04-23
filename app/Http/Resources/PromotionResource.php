@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Promotion;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @mixin Promotion
@@ -21,7 +22,7 @@ class PromotionResource extends JsonResource
         return [
             'id' => $this->id,
             'promotion_type' => $this->promotion_type,
-            'img_cover' => $this->img_cover,
+            'img_cover' => Storage::disk('public')->url($this->img_cover),
             'title' => $this->title,
             'content' => $this->content,
             'from_date' => $this->from_date,

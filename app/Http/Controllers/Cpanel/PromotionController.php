@@ -17,7 +17,7 @@ class PromotionController extends CpanelBaseController
      * Display a listing of the resource.
      *
      * @param  Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index(Request $request)
     {
@@ -39,7 +39,7 @@ class PromotionController extends CpanelBaseController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function create()
     {
@@ -52,11 +52,12 @@ class PromotionController extends CpanelBaseController
      * Store a newly created resource in storage.
      *
      * @param  PromotionCreatesRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(PromotionCreatesRequest $request)
     {
-        Promotion::create($request->validated());
+        Promotion::create($request->fromCreateRequest());
 
         return Redirect::route('cpanel.promotions.index')->with('message', 'Promotion created.');
     }
@@ -76,11 +77,15 @@ class PromotionController extends CpanelBaseController
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Promotion  $promotion
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function edit(Promotion $promotion)
     {
-        //
+        $this->setPageTitle('Promotion - Edit');
+
+        return Inertia::render('Promotions/Edit', [
+            'promotion' => new PromotionResource($promotion)
+        ]);
     }
 
     /**

@@ -25,7 +25,7 @@ class Promotion extends Model
     public function getSlugOptions()
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('name')
+            ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
     }
 }
