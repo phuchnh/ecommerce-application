@@ -3,25 +3,35 @@
     <template #header>
       <h2 class="page-title">{{ $page.props.cpanel.title }}</h2>
     </template>
+
     <template #action>
-      <form class="d-flex" @submit.prevent="search">
+      <div class="d-flex">
         <div class="mr-3">
-          <div class="input-icon">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Search by title"
-              v-model="filter.title"
-            />
-            <span class="input-icon-addon">
-              <i class="ti ti-search icon"></i>
-            </span>
-          </div>
+          <SearchFilter v-model.sync="filter" @search="search">
+            <b-dropdown-group header="Type">
+              <div class="mb-3 mx-3">
+                <select class="form-select" v-model="filter.type">
+                  <option value="">Both</option>
+                  <option value="online">Online</option>
+                  <option value="offline">Offline</option>
+                </select>
+              </div>
+            </b-dropdown-group>
+            <b-dropdown-group header="Status">
+              <div class="mb-3 mx-3">
+                <select class="form-select" v-model="filter.active">
+                  <option value="">Both</option>
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </div>
+            </b-dropdown-group>
+          </SearchFilter>
         </div>
         <inertia-link class="btn btn-primary" :href="route('cpanel.promotions.create')">
           Create
         </inertia-link>
-      </form>
+      </div>
     </template>
 
     <div class="row row-cards">
@@ -87,6 +97,7 @@
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated';
 import SimplePaginate from '@/Components/SimplePaginate';
 import Empty from '@/Components/Empty';
+import SearchFilter from '@/Components/SearchFilter';
 import { Inertia } from '@inertiajs/inertia';
 
 export default {
@@ -94,6 +105,7 @@ export default {
     BreezeAuthenticatedLayout,
     SimplePaginate,
     Empty,
+    SearchFilter,
   },
 
   props: {
@@ -101,19 +113,18 @@ export default {
     filter: Object,
   },
 
+  remember: ['filter'],
+
   data() {
     return {
       fields: [
         { key: 'title', label: 'TITLE' },
-        { key: 'cover_image_url', label: 'IMG' },
+        { key: 'cover_image_url', label: 'IMAGE' },
         { key: 'promotion_type', label: 'TYPE' },
         { key: 'from_date', label: 'FROM DATE' },
         { key: 'to_date', label: 'TO DATE' },
-        { key: 'published_at', label: 'PUBLISHED' },
+        { key: 'published_at', label: 'STATUS' },
       ],
-      form: this.$inertia.form({
-        image: null,
-      }),
     };
   },
 
@@ -139,7 +150,9 @@ export default {
       Inertia.visit(
         this.route('cpanel.promotions.index', {
           _query: {
-            'filter[title]': this.filter.title,
+            'filter[keyword]': this.filter.keyword,
+            'filter[type]': this.filter.type,
+            'filter[active]': this.filter.active,
           },
         }),
         {

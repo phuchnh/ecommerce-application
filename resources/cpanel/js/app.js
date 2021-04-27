@@ -6,6 +6,7 @@ import Vue from 'vue';
 import UpdatePageTitle from './Mixins/UpdatePageTitle';
 import DateFormat from './Mixins/DateFormat';
 import PreviewUploadedFile from './Mixins/PreviewUploadedFile';
+import JsonViewer from './Mixins/JsonViewer';
 import { BootstrapVue } from 'bootstrap-vue';
 import VueLazyload from 'vue-lazyload';
 
@@ -15,6 +16,7 @@ Vue.use(InertiaPlugin);
 Vue.mixin(UpdatePageTitle);
 Vue.mixin(DateFormat);
 Vue.mixin(PreviewUploadedFile);
+Vue.mixin(JsonViewer);
 Vue.mixin({ methods: { route } });
 
 Vue.config.productionTip = false;

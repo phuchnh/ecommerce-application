@@ -19,8 +19,8 @@ class CreatePromotionsTable extends Migration
             $table->string('promotion_type')->index();
             $table->string('title')->index();
             $table->longText('content')->nullable();
-            $table->timestamp('from_date')->nullable();
-            $table->timestamp('to_date')->nullable();
+            $table->date('from_date')->nullable();
+            $table->date('to_date')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
             $table->softDeletes();

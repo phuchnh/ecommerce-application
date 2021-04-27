@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cpanel;
 
+use App\Http\Controllers\Cpanel\Filters\FilterPromotionByStatus;
 use App\Http\Requests\PromotionCreatesRequest;
 use App\Http\Requests\PromotionUpdatesRequest;
 use App\Http\Resources\PromotionResource;
@@ -9,6 +10,7 @@ use App\Models\Promotion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class PromotionController extends CpanelBaseController
@@ -24,8 +26,12 @@ class PromotionController extends CpanelBaseController
         $this->setPageTitle('Promotion');
 
         $query = QueryBuilder::for(Promotion::class)
-            ->allowedFilters(['title'])
-            ->defaultSorts(['-id'])
+            ->allowedFilters([
+                AllowedFilter::partial('keyword', 'title'),
+                AllowedFilter::exact('type', 'promotion_type')->ignore(null),
+                AllowedFilter::custom('active', new FilterPromotionByStatus()),
+            ])
+            ->defaultSorts(['-updated_at'])
             ->simplePaginate(10);
 
         return Inertia::render('Promotions/Index', [

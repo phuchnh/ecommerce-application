@@ -54,11 +54,23 @@
       <div class="col">
         <div class="row">
           <div class="col">
-            <DatePicker v-model="form.from_date" class="w-100" :shortcuts="shortcuts" />
+            <DatePicker
+              v-model="form.from_date"
+              class="w-100"
+              :shortcuts="shortcuts"
+              value-type="YYYY-MM-DD"
+              format="YYYY-MM-DD"
+            />
             <div v-if="errors.from_date" class="text-red">{{ errors.from_date }}</div>
           </div>
           <div class="col">
-            <DatePicker v-model="form.to_date" class="w-100" :shortcuts="shortcuts" />
+            <DatePicker
+              v-model="form.to_date"
+              class="w-100"
+              :shortcuts="shortcuts"
+              value-type="YYYY-MM-DD"
+              format="YYYY-MM-DD"
+            />
             <div v-if="errors.to_date" class="text-red">{{ errors.to_date }}</div>
           </div>
         </div>
