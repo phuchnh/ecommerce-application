@@ -33,7 +33,6 @@
       </div>
       <div class="col-md-12">
         <div class="card">
-          <Empty v-if="!promotions.data.length" />
           <b-table-lite
             striped
             hover
