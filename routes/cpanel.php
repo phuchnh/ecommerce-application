@@ -31,15 +31,6 @@ Route::prefix('admin')->as('cpanel.')->group(function () {
 
         Route::put('/setting', [SettingController::class, 'update']);
 
-        Route::get('/media', [MediaController::class, 'index'])
-            ->name('media.index');
-
-        Route::post('/media/upload', [MediaController::class, 'upload'])
-            ->name('media.upload');
-
-        Route::delete('/media/{media}', [MediaController::class, 'destroy'])
-            ->name('media.destroy');
-
         // Promotions
         Route::resource('promotions', PromotionController::class);
     });

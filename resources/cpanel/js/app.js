@@ -10,10 +10,8 @@ import Vue2Editor from 'vue2-editor';
 import VueFlatPickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
 
-Vue.use(VueLazyload, {
-  preLoad: 1.3,
-  attempt: 1,
-});
+Vue.use(VueFlatPickr);
+Vue.use(VueLazyload, { preLoad: 1.3, attempt: 1 });
 Vue.use(BootstrapVue);
 Vue.use(VueFlatPickr);
 Vue.use(Vue2Editor);

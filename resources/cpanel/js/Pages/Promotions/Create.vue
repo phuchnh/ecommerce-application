@@ -59,13 +59,11 @@
                 <div class="col">
                   <div class="row">
                     <div class="col">
-                      <input type="date" class="form-control" v-model="form.from_date" />
-                      <div v-if="errors.from_date" class="text-red">
-                        {{ errors.from_date }}
-                      </div>
+                      <flat-pickr v-model="form.from_date" class="form-control"></flat-pickr>
+                      <div v-if="errors.from_date" class="text-red">{{ errors.from_date }}</div>
                     </div>
                     <div class="col">
-                      <input type="date" class="form-control" v-model="form.to_date" />
+                      <flat-pickr v-model="form.to_date" class="form-control"></flat-pickr>
                       <div v-if="errors.to_date" class="text-red">{{ errors.to_date }}</div>
                     </div>
                   </div>
@@ -80,8 +78,8 @@
               </div>
               <div class="form-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="button" class="btn btn-outline-success">Submit & Publish</button>
                 <inertia-link
+                  :preserveState="true"
                   :href="route('cpanel.promotions.index')"
                   class="btn btn-outline-secondary"
                 >
@@ -98,12 +96,10 @@
 
 <script>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated';
-import MediaDialog from '@/Components/MediaDialog';
 import { VueEditor } from 'vue2-editor';
 
 export default {
   components: {
-    MediaDialog,
     VueEditor,
     BreezeAuthenticatedLayout,
   },

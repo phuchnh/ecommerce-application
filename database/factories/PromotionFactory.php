@@ -23,11 +23,11 @@ class PromotionFactory extends Factory
     {
         return [
             'promotion_type' => $this->faker->randomElement(['offline', 'online']),
-            'img_cover' => $this->faker->imageUrl(),
-            'title' => $this->faker->title,
+            'img_cover' => '/static/6f6e2ef709fef97a.jpg',
+            'title' => $this->faker->sentence,
             'content' => $this->faker->randomHtml(),
-            'from_date' => $this->faker->dateTime,
-            'to_date' => $this->faker->dateTime,
+            'from_date' => now(),
+            'to_date' => now()->addMonth(),
             'published_at' => $this->faker->dateTime,
         ];
     }

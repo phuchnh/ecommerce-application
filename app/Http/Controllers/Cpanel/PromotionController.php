@@ -25,6 +25,7 @@ class PromotionController extends CpanelBaseController
 
         $query = QueryBuilder::for(Promotion::class)
             ->allowedFilters(['title'])
+            ->defaultSorts(['-id'])
             ->simplePaginate(10);
 
         return Inertia::render('Promotions/Index', [

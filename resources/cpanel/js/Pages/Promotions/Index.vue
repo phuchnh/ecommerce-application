@@ -34,39 +34,30 @@
       <div class="col-md-12">
         <div class="card">
           <Empty v-if="!promotions.data.length" />
-          <div class="list-group card-list-group" v-if="promotions.data.length">
-            <div class="list-group-item" v-for="item of promotions.data" :key="item.id">
-              <div class="row row-sm align-items-center">
-                <div class="col-auto">
-                  <img
-                    :src="item.img_cover_url"
-                    class="object-cover"
-                    :alt="item.title"
-                    width="100"
-                    height="100"
-                  />
-                </div>
-                <div class="col">
-                  <div class="text-body">
-                    <inertia-link :href="route('cpanel.promotions.edit', { promotion: item.id })">
-                      {{ item.title }}
-                    </inertia-link>
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <div class="text-muted">{{ item.promotion_type }}</div>
-                </div>
-                <div class="col-auto">
-                  <div class="text-muted">{{ item.size }}</div>
-                </div>
-                <div class="col-auto">
-                  <button class="btn btn-icon btn-outline-danger" @click="remove(item.id)">
-                    <i class="ti ti-trash icon"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <b-table-lite
+            striped
+            hover
+            :items="promotions.data"
+            primary-key="id"
+            fixed
+            :fields="fields"
+            class="table-vcenter card-table"
+          >
+            <template #cell(title)="data">
+              <inertia-link :href="route('cpanel.promotions.edit', { promotion: data.item.id })">
+                {{ data.item.title }}
+              </inertia-link>
+            </template>
+            <template #cell(img_cover_url)="data">
+              <img
+                v-lazy="data.item.img_cover_url"
+                :alt="data.item.title"
+                class="object-cover rounded"
+                width="100"
+                height="100"
+              />
+            </template>
+          </b-table-lite>
         </div>
       </div>
       <div class="col-md-12" v-if="promotions.data.length">
@@ -96,6 +87,14 @@ export default {
 
   data() {
     return {
+      fields: [
+        { key: 'title', label: 'TITLE' },
+        { key: 'img_cover_url', label: 'IMG' },
+        { key: 'promotion_type', label: 'TYPE' },
+        { key: 'from_date', label: 'FROM DATE' },
+        { key: 'to_date', label: 'TO DATE' },
+        { key: 'published_at', label: 'PUBLISHED' },
+      ],
       form: this.$inertia.form({
         image: null,
       }),
@@ -105,9 +104,6 @@ export default {
   computed: {
     user() {
       return this.$page.props.auth.user;
-    },
-    images() {
-      return Array.from(Array(100).keys());
     },
   },
 

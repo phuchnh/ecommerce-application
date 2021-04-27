@@ -16,7 +16,7 @@ class SettingController extends CpanelBaseController
     {
         $this->setPageTitle('Setting');
 
-        return Inertia::render('Setting', [
+        return Inertia::render('Setting/General', [
             'setting' => config('options')
         ]);
     }
