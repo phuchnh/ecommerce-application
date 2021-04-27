@@ -23,7 +23,7 @@ class PromotionFactory extends Factory
     {
         return [
             'promotion_type' => $this->faker->randomElement(['offline', 'online']),
-            'cover_image' => '/static/6f6e2ef709fef97a.jpg',
+            'cover_image' => '/static/placeholder.jpeg',
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraph,
             'from_date' => now(),
