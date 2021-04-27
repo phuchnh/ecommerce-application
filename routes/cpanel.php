@@ -32,6 +32,9 @@ Route::prefix('admin')->as('cpanel.')->group(function () {
         Route::put('/setting', [SettingController::class, 'update']);
 
         // Promotions
+        Route::put('promotions/{promotion}/publish', [PromotionController::class, 'publish'])
+            ->name('promotions.publish');
+
         Route::resource('promotions', PromotionController::class);
     });
 });

@@ -113,4 +113,21 @@ class PromotionController extends CpanelBaseController
         $promotion->delete();
         return Redirect::route('cpanel.promotions.index')->with('message', 'Promotion deleted.');
     }
+
+    /**
+     * Publish the specified resource.
+     *
+     * @param  \App\Models\Promotion  $promotion
+     * @return \Illuminate\Http\Response
+     */
+    public function publish(Promotion $promotion)
+    {
+        if ($promotion->published_at) {
+            $promotion->update(['published_at' => null]);
+        } else {
+            $promotion->update(['published_at' => $promotion->freshTimestamp()]);
+        }
+
+        return Redirect::route('cpanel.promotions.index');
+    }
 }

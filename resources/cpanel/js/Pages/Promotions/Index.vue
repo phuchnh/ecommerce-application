@@ -56,6 +56,17 @@
                 height="100"
               />
             </template>
+
+            <template #cell(published_at)="data">
+              <label class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  :checked="!!data.item.published_at"
+                  @input="published(data.item.id)"
+                />
+              </label>
+            </template>
           </b-table-lite>
         </div>
       </div>
@@ -107,6 +118,15 @@ export default {
   },
 
   methods: {
+    published(id) {
+      Inertia.put(this.route('cpanel.promotions.publish', { promotion: id }), {
+        onFinish: () => {
+          Inertia.visit(this.route('cpanel.promotions.index'), {
+            only: ['promotions'],
+          });
+        },
+      });
+    },
     remove(id) {
       if (!confirm('Delete?')) {
         return;

@@ -24,13 +24,17 @@
                       v-if="this.promotion.data.img_cover_url && !is_upload"
                       :src="this.promotion.data.img_cover_url"
                       :alt="this.promotion.data.title"
-                      height="150"
+                      class="object-cover rounded"
+                      width="100"
+                      height="100"
                     />
                     <img
                       v-if="form.img_cover && is_upload"
                       :src="form.img_cover | preview"
                       :alt="form.img_cover.name"
-                      height="150"
+                      class="object-cover rounded"
+                      width="100"
+                      height="100"
                     />
                   </div>
                   <div v-if="errors.img_cover" class="text-red">
@@ -91,8 +95,8 @@
                 <button type="submit" class="btn btn-primary" :disabled="form.processing">
                   Submit
                 </button>
-                <button type="button" class="btn btn-outline-success">Submit & Publish</button>
                 <inertia-link
+                  :preserveState="true"
                   :href="route('cpanel.promotions.index')"
                   class="btn btn-outline-secondary"
                 >
