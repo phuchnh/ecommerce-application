@@ -39,7 +39,11 @@
         <b-alert variant="warning" show dismissible fade>{{ $page.props.errors.image }}</b-alert>
       </div>
       <div class="col-md-12" v-if="promotions.data.length">
-        <SimplePaginate :links="promotions.links" />
+        <SimplePaginate
+          :links="promotions.links"
+          :meta="promotions.meta"
+          @pageSizeChange="search({ filter, paging: $event })"
+        />
       </div>
       <div class="col-md-12">
         <div class="card">
@@ -58,10 +62,10 @@
               </inertia-link>
             </template>
             <template #cell(from_date)="data">
-              {{ data.item.from_date | dateFormat('LLL') }}
+              {{ data.item.from_date | dateFormat('L') }}
             </template>
             <template #cell(to_date)="data">
-              {{ data.item.to_date | dateFormat('LLL') }}
+              {{ data.item.to_date | dateFormat('L') }}
             </template>
             <template #cell(cover_image_url)="data">
               <img
@@ -87,7 +91,7 @@
         </div>
       </div>
       <div class="col-md-12" v-if="promotions.data.length">
-        <SimplePaginate :links="promotions.links" />
+        <SimplePaginate :links="promotions.links" :meta="promotions.meta" />
       </div>
     </div>
   </breeze-authenticated-layout>
@@ -140,21 +144,19 @@ export default {
     },
 
     async remove(id) {
-      if (!confirm('Delete?')) {
-        return;
-      }
-      await Inertia.delete(this.route('cpanel.promotions.destroy', { promotion: id }));
+      await Inertia.delete(this.route('cpanel.promotions.destroy', { promotion: id }), {
+        onStart: () => confirm('Are you sure you want to delete this promotion?'),
+      });
     },
 
     search() {
-      Inertia.visit(
-        this.route('cpanel.promotions.index', {
-          _query: {
-            'filter[keyword]': this.filter.keyword,
-            'filter[type]': this.filter.type,
-            'filter[active]': this.filter.active,
-          },
-        }),
+      Inertia.get(
+        this.route('cpanel.promotions.index'),
+        {
+          'filter[keyword]': this.filter.keyword,
+          'filter[type]': this.filter.type,
+          'filter[active]': this.filter.active,
+        },
         {
           only: ['promotions', 'filter'],
         }

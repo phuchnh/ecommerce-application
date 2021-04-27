@@ -12,6 +12,17 @@
           Prev
         </inertia-link>
       </li>
+      <li class="page-item">
+        <select
+          class="form-select"
+          v-model="meta.per_page"
+          @change="$emit('pageSizeChange', $event)"
+        >
+          <option value="10">10</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </li>
       <li class="page-item" :class="{ disabled: !hasNext }">
         <inertia-link
           class="page-link"
@@ -32,6 +43,7 @@ export default {
   name: 'SimplePaginate',
   props: {
     links: Object,
+    meta: Object,
   },
   computed: {
     prevUrl() {

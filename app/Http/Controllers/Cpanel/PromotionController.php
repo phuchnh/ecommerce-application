@@ -32,7 +32,7 @@ class PromotionController extends CpanelBaseController
                 AllowedFilter::custom('active', new FilterPromotionByStatus()),
             ])
             ->defaultSorts(['-updated_at'])
-            ->simplePaginate(10);
+            ->simplePaginate($request->get('page_size', 10));
 
         return Inertia::render('Promotions/Index', [
             'filter' => $request->get('filter', (object) []),
@@ -112,7 +112,7 @@ class PromotionController extends CpanelBaseController
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Promotion  $promotion
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Promotion $promotion)
     {
@@ -124,7 +124,7 @@ class PromotionController extends CpanelBaseController
      * Publish the specified resource.
      *
      * @param  \App\Models\Promotion  $promotion
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function publish(Promotion $promotion)
     {
