@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class MediaSeeder extends Seeder
+class PromotionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class MediaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Promotion::factory(50)->create();
     }
 }

@@ -5,9 +5,10 @@ use App\Http\Controllers\Cpanel\Auth\LoginController;
 use App\Http\Controllers\Cpanel\DashboardController;
 use App\Http\Controllers\Cpanel\SettingController;
 use App\Http\Controllers\Cpanel\MediaController;
+use App\Http\Controllers\Cpanel\PromotionController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('cp')->as('cpanel.')->group(function () {
+Route::prefix('admin')->as('cpanel.')->group(function () {
 
     Route::get('/login', [LoginController::class, 'create'])
         ->middleware('guest')
@@ -19,8 +20,8 @@ Route::prefix('cp')->as('cpanel.')->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])
         ->name('logout');
 
-    Route::middleware('auth:cpanel')->group(function () {
-        Route::redirect('/', '/cp/dashboard');
+    Route::middleware(['auth', 'admin'])->group(function () {
+        Route::redirect('/', '/admin/dashboard');
 
         Route::get('/dashboard', DashboardController::class)
             ->name('dashboard');
@@ -30,13 +31,10 @@ Route::prefix('cp')->as('cpanel.')->group(function () {
 
         Route::put('/setting', [SettingController::class, 'update']);
 
-        Route::get('/media', [MediaController::class, 'index'])
-            ->name('media.index');
+        // Promotions
+        Route::put('promotions/{promotion}/publish', [PromotionController::class, 'publish'])
+            ->name('promotions.publish');
 
-        Route::post('/media/upload', [MediaController::class, 'upload'])
-            ->name('media.upload');
-
-        Route::delete('/media/{media}', [MediaController::class, 'destroy'])
-            ->name('media.destroy');
+        Route::resource('promotions', PromotionController::class);
     });
 });

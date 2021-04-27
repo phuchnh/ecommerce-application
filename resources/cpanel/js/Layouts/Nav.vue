@@ -13,9 +13,9 @@
               <span class="nav-link-title">SETTING</span>
             </inertia-link>
           </li>
-          <li class="nav-item" :class="{ active: route().current('cpanel.media.index') }">
-            <inertia-link class="nav-link" :href="route('cpanel.media.index')">
-              <span class="nav-link-title">MEDIA</span>
+          <li class="nav-item" :class="{ active: route().current('cpanel.promotions.index') }">
+            <inertia-link class="nav-link" :href="route('cpanel.promotions.index')">
+              <span class="nav-link-title">PROMOTION</span>
             </inertia-link>
           </li>
         </ul>
