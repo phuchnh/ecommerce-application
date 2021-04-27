@@ -25,7 +25,7 @@ class PromotionUpdatesRequest extends FormRequest
     {
         return [
             'promotion_type' => 'filled|string',
-            'img_cover' => 'filled',
+            'cover_image' => 'filled',
             'title' => 'filled|max:120',
             'content' => 'filled',
             'from_date' => 'filled|date',
@@ -38,12 +38,12 @@ class PromotionUpdatesRequest extends FormRequest
      */
     public function validatedInputs()
     {
-        $path = optional($this->file('img_cover'))->storePublicly('uploads', [
+        $path = optional($this->file('cover_image'))->storePublicly('uploads', [
             'disk' => 'public'
         ]);
 
         if ($path) {
-            return array_merge($this->validated(), ['img_cover' => $path]);
+            return array_merge($this->validated(), ['cover_image' => $path]);
         }
 
         return $this->validated();

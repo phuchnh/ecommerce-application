@@ -47,9 +47,15 @@
                 {{ data.item.title }}
               </inertia-link>
             </template>
-            <template #cell(img_cover_url)="data">
+            <template #cell(from_date)="data">
+              {{ data.item.from_date | dateFormat('LLL') }}
+            </template>
+            <template #cell(to_date)="data">
+              {{ data.item.to_date | dateFormat('LLL') }}
+            </template>
+            <template #cell(cover_image_url)="data">
               <img
-                v-lazy="data.item.img_cover_url"
+                v-lazy="data.item.cover_image_url"
                 :alt="data.item.title"
                 class="object-cover rounded"
                 width="100"
@@ -99,7 +105,7 @@ export default {
     return {
       fields: [
         { key: 'title', label: 'TITLE' },
-        { key: 'img_cover_url', label: 'IMG' },
+        { key: 'cover_image_url', label: 'IMG' },
         { key: 'promotion_type', label: 'TYPE' },
         { key: 'from_date', label: 'FROM DATE' },
         { key: 'to_date', label: 'TO DATE' },
@@ -118,27 +124,15 @@ export default {
   },
 
   methods: {
-    published(id) {
-      Inertia.put(this.route('cpanel.promotions.publish', { promotion: id }), {
-        onFinish: () => {
-          Inertia.visit(this.route('cpanel.promotions.index'), {
-            only: ['promotions'],
-          });
-        },
-      });
+    async published(id) {
+      await Inertia.put(this.route('cpanel.promotions.publish', { promotion: id }));
     },
-    remove(id) {
+
+    async remove(id) {
       if (!confirm('Delete?')) {
         return;
       }
-
-      Inertia.delete(this.route('cpanel.promotions.destroy', { promotion: id }), {
-        onFinish: () => {
-          Inertia.visit(this.route('cpanel.promotions.index'), {
-            only: ['promotions'],
-          });
-        },
-      });
+      await Inertia.delete(this.route('cpanel.promotions.destroy', { promotion: id }));
     },
 
     search() {

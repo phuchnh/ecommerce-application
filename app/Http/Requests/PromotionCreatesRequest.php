@@ -27,7 +27,7 @@ class PromotionCreatesRequest extends FormRequest
     {
         return [
             'promotion_type' => 'required',
-            'img_cover' => 'required|image',
+            'cover_image' => 'required|image',
             'title' => 'required|max:120',
             'content' => 'required',
             'from_date' => 'required|date',
@@ -41,14 +41,14 @@ class PromotionCreatesRequest extends FormRequest
      */
     public function validatedInputs()
     {
-        $path = $this->file('img_cover')->storePublicly('uploads', [
+        $path = $this->file('cover_image')->storePublicly('uploads', [
             'disk' => 'public'
         ]);
 
         if (!$path) {
-            throw ValidationException::withMessages(['img_cover' => 'Upload image cover failed.']);
+            throw ValidationException::withMessages(['cover_image' => 'Upload image cover failed.']);
         }
 
-        return array_merge($this->validated(), ['img_cover' => $path]);
+        return array_merge($this->validated(), ['cover_image' => $path]);
     }
 }

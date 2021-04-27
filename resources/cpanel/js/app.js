@@ -4,19 +4,17 @@ import { InertiaProgress } from '@inertiajs/progress';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue';
 import Vue from 'vue';
 import UpdatePageTitle from './Mixins/UpdatePageTitle';
+import DateFormat from './Mixins/DateFormat';
+import PreviewUploadedFile from './Mixins/PreviewUploadedFile';
 import { BootstrapVue } from 'bootstrap-vue';
 import VueLazyload from 'vue-lazyload';
-import Vue2Editor from 'vue2-editor';
-import VueFlatPickr from 'vue-flatpickr-component';
-import 'flatpickr/dist/flatpickr.css';
 
-Vue.use(VueFlatPickr);
 Vue.use(VueLazyload, { preLoad: 1.3, attempt: 1 });
 Vue.use(BootstrapVue);
-Vue.use(VueFlatPickr);
-Vue.use(Vue2Editor);
 Vue.use(InertiaPlugin);
 Vue.mixin(UpdatePageTitle);
+Vue.mixin(DateFormat);
+Vue.mixin(PreviewUploadedFile);
 Vue.mixin({ methods: { route } });
 
 Vue.config.productionTip = false;

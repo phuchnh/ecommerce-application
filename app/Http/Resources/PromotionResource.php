@@ -22,8 +22,8 @@ class PromotionResource extends JsonResource
         return [
             'id' => $this->id,
             'promotion_type' => $this->promotion_type,
-            'img_cover' => $this->img_cover,
-            'img_cover_url' => Storage::disk('public')->url($this->img_cover),
+            'cover_image' => $this->cover_image,
+            'cover_image_url' => Storage::disk('public')->url($this->cover_image),
             'title' => $this->title,
             'content' => $this->when(!$request->routeIs(['index']), function () {
                 return $this->content;

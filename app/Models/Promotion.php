@@ -4,28 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Promotion extends Model
 {
     use HasFactory;
-    use HasSlug;
+    use SoftDeletes;
+
+
+    protected $dates = [
+        'from_date',
+        'to_date',
+        'published_at',
+    ];
 
     protected $guarded = [
         'id',
         'created_at',
         'updated_at',
+        'deleted_at',
     ];
-
-    /**
-     * @return SlugOptions
-     */
-    public function getSlugOptions()
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
-    }
 }
