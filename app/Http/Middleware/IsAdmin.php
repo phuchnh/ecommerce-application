@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Validation\UnauthorizedException;
 
 class IsAdmin
 {
@@ -19,5 +20,7 @@ class IsAdmin
         if ($request->user()->is_admin) {
             return $next($request);
         }
+
+        throw new UnauthorizedException();
     }
 }

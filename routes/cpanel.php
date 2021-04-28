@@ -4,7 +4,6 @@
 use App\Http\Controllers\Cpanel\Auth\LoginController;
 use App\Http\Controllers\Cpanel\DashboardController;
 use App\Http\Controllers\Cpanel\SettingController;
-use App\Http\Controllers\Cpanel\MediaController;
 use App\Http\Controllers\Cpanel\PromotionController;
 use Illuminate\Support\Facades\Route;
 
